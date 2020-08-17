@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자소설 닷컴</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"
+</head>
+<body>
+
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'logout' %}">
+        <button>로그아웃</button>
+    </a>
+
+    안녕하세요! {{user}}님!
+
+    {% else %}
+
+    <a href="{% url 'signup' %}">
+        <button>회원가입</button>
+    </a>
+
+    <a href="{% url 'login' %}">
+        <button>로그인</button>
+    </a>
+
+    {% endif %}
+
+    
+
+    <div class="make_jss">
+        <a href="{% url 'create' %}">
+        <div class="plus_btn">
+            +
+        </div>
+        </a>
+        <p>자기소개서 작성</p>
+        </div>
+
+
+        {% for jss in all_jss %}
+        <a href="{% url 'detail' jss.id %}">
+        <div class="all_jss">
+            <p>{{jss.id}}</p>
+
+            <p>{{jss.title}}</p>
+
+            <p>{{jss.content}}</p>
+
+            <p>{{jss.update_at|date:"Y년 m월 d일"}}</p>
+        </div>
+        </a>
+        {% endfor %}
+</body>
+</html>
