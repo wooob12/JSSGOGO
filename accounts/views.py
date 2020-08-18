@@ -16,5 +16,5 @@ def signup(request):
     return render(request, 'signup.html', {'regi_form':regi_form})
 
 
-class MyLoginView(LoginView):
-    template_name = 'login.html'
+#class MyLoginView(LoginView):
+#    template_name = 'login.html'
