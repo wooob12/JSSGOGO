@@ -71,7 +71,7 @@ def update(request, jss_id):
     return render(request, 'create.html', {'jss_form' : jss_form})
 
 
-def create_comment(request):
+def create_comment(request, jss_id):
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
         temp_form = comment_form.save(commit=False)
@@ -79,3 +79,12 @@ def create_comment(request):
         temp_form.jasoseol = Jasoseol.objects.get(pk=jss_id)
         temp_form.save()
         return redirect('detail', jss_id)
+
+def delete_comment(request, jss_id, comment_id):
+    my_comment = Comment.objects.get(pk=comment_id)
+    if request.user == my_comment.author:
+        my_comment.delete()
+        return redirect('detail', jss_id)
+
+    else:
+        raise PermissionDenied

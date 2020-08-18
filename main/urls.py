@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, create, detail, delete, update, my_index, create_comment
+from .views import index, create, detail, delete, update, my_index, create_comment, delete_comment
 ## main 아래 있어서 .views로 해줌
 
 
@@ -13,4 +13,5 @@ urlpatterns = [
 
     # comment #
     path('create_comment/<int:jss_id>/', create_comment, name="create_comment"),
+    path('delete_comment/<int:jss_id>/<int:comment_id>/', delete_comment, name="delete_comment"),
 ]
